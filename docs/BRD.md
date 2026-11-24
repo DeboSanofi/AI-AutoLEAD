@@ -25,7 +25,7 @@ Phase 1 is deliberately narrow: create the experiment and fill its worksheets fr
 **Out of scope for Phase 1:**
 
 - Workflow orchestration or decision logic (owned by GBG).
-- The Test-side ELN integration (target is BenchLink) and the inventory integration (RMM). These follow the same concept but are separate efforts; they share the infrastructure discussion.
+- Any target system other than ChemDiary; this project covers the ChemDiary integration only.
 - Review and signing of experiments, which the ChemDiary API does not cover per the call. Registration and publishing are expected to be automatic, with a reference to the responsible lab head agreed with the patent department.
 
 ## 3. Stakeholders and systems
@@ -36,11 +36,10 @@ Phase 1 is deliberately narrow: create the experiment and fill its worksheets fr
 | Martin Trott | Technical / programme lead (DE) | Defines the middleware concept and scope |
 | Second "Jan" (chemist user) | Business user | Will walk through the template manually; same first name as the lead, so use surnames in invites |
 | Debosmita Bose | Product Owner (IN) | Translates this into user stories; coordinates developers |
-| Gernot, Deepak | Technical contacts | Gernot leads the Test/BenchLink and RMM use cases; Deepak is invited to the infrastructure call |
+| Gernot, Deepak | Technical contacts | Input on hosting and deployment of the middleware |
 | GBG (Green Button Go) | Lab orchestration software | Provided by BioZero; calls our API |
 | ChemDiary | Make-side ELN | Target system for this project |
 | ChemDiary vendor | Template and API support | Referred to as "RAVI"/"Reviti" in the transcript; confirm exact name |
-| BenchLink, RMM | Test-side ELN; reagent inventory | Sibling integrations, not in this scope |
 | Patent department | Governance | Agreed automatic registration/publishing with lab-head reference |
 
 ## 4. Business requirements
@@ -57,7 +56,7 @@ Phase 1 is deliberately narrow: create the experiment and fill its worksheets fr
 | BR-08 | GBG can trigger analytical requests (tasks) for final compounds, and the resulting purity is returned to GBG | 2 | Should |
 | BR-09 | Compound registration and publishing / experiment closure can be triggered automatically, with a lab-head reference | 2 | Should |
 | BR-10 | Event notifications back to GBG where required | 3 | Could |
-| BR-11 | Solution is deployable as a containerised service, reusable for the BenchLink and RMM integrations | 1 | Should |
+| BR-11 | Solution is deployable as a containerised service | 1 | Should |
 
 ## 5. High-level solution and data flow
 
@@ -66,11 +65,9 @@ flowchart LR
     GBG["GBG (BioZero)<br/>controls lab robots<br/>owns workflow logic"]
     MW["Middleware API (new)<br/>one endpoint per worksheet<br/>maps JSON to ChemDiary<br/>no workflow logic in Phase 1"]
     CD["ChemDiary (ELN)<br/>AutoLEAD template<br/>experiment, worksheets"]
-    SIB["Same pattern: BenchLink (Test ELN), RMM (inventory)"]
     GBG -- "JSON per step" --> MW
     MW -- "API calls" --> CD
     MW -- "ref. ID" --> GBG
-    MW -.-> SIB
 ```
 
 GBG sends structured JSON per workflow step; the middleware turns each into the ChemDiary calls and returns the experiment reference ID. Phase 2 also returns the analytics purity result, and the exact return mechanism is still open (see BR-07).
@@ -92,7 +89,7 @@ Development can start once the template is frozen, the field mapping is agreed a
 | P9 | ChemDiary dev environment and API credentials for the team | Technical | Martin, ChemDiary vendor | Development |
 | P10 | ChemDiary API catalogue and call sequence per worksheet (about 2+ calls each) | Technical | Dev team, vendor | Estimation |
 | P11 | GBG/BioZero interface agreement: sync response vs. webhook plus callback, auth, payload sizes, error handling | Technical | Martin, BioZero | Development |
-| P12 | Hosting and deployment pattern (containers, scaling), aligned with BenchLink/RMM work | Technical | Gernot, Martin, Deepak | Development |
+| P12 | Hosting and deployment pattern (containers, scaling) | Technical | Gernot, Martin, Deepak | Development |
 | P13 | Non-functional targets: availability, expected call volume, logging and audit trail | Technical | Tech Lead | Design |
 | P14 | GBG test or sandbox endpoint to run end-to-end tests | Technical | BioZero | Integration test |
 
@@ -117,12 +114,12 @@ Development can start once the template is frozen, the field mapping is agreed a
 - Does GBG receive the experiment ID in the reply to the create call, or via a later callback?
 - Who is the named lab head for automatic registration and publishing?
 - What call volume and latency are expected per experiment?
-- Is the middleware a single service shared with BenchLink and RMM, or one per target system?
+- Which hosting and deployment pattern will the middleware use?
 
 **Next steps**
 
 1. Schedule the template walkthrough with the business (Debosmita to organise).
 2. Debosmita to speak with Martin and Gernot on how the Leap-side deliverable is packaged.
 3. Jan H. to request access for Debosmita to the AutoLEAD Teams site and share the latest presentation.
-4. Monday call with Gernot, Martin and Deepak on the shared infrastructure (RMM preparation).
+4. Call with Gernot, Martin and Deepak on hosting and deployment of the middleware.
 5. Set up a regular stand-up once the walkthrough is done.

@@ -29,12 +29,12 @@ Phase 1 (Make-side ChemDiary integration) runs in four phases, from requirements
 | Phase | Goal | Key activities | Owner | Exit gate | Indicative duration |
 | --- | --- | --- | --- | --- | --- |
 | 1. Requirement gathering (now) | Agree what to build | Template walkthrough with business and the second Jan; field mapping GBG vs. ChemDiary; mandatory vs. optional fields; BRD review; user stories | Product Owner, Jan H. | BRD signed off; template frozen or change process agreed; field mapping complete | 2 weeks |
-| 2. Spikes and prerequisite architecture docs | Remove technical unknowns before coding | ChemDiary API call sequence per worksheet; GBG/BioZero interface spike (sync reply vs. webhook plus callback, auth, errors); JSON schema draft; hosting and deployment pattern, aligned with BenchLink/RMM; non-functional targets | Tech team, Tech Lead | Architecture doc approved; JSON schema agreed; dev environment and credentials available | 3 weeks |
+| 2. Spikes and prerequisite architecture docs | Remove technical unknowns before coding | ChemDiary API call sequence per worksheet; GBG/BioZero interface spike (sync reply vs. webhook plus callback, auth, errors); JSON schema draft; hosting and deployment pattern; non-functional targets | Tech team, Tech Lead | Architecture doc approved; JSON schema agreed; dev environment and credentials available | 3 weeks |
 | 3a. Development: template | Create an experiment from the AutoLEAD template and return the reference ID | Create-experiment endpoint; header fields; reaction scheme tables; unit and contract tests | Dev team | Experiment created from GBG test call; ID returned | 3 weeks |
 | 3b. Development: mandatory worksheets | Fill each mandatory worksheet with one call | One endpoint per mandatory worksheet (e.g. work-up); optional fields by reaction step; error handling and logging; end-to-end tests with GBG sandbox | Dev team | All mandatory worksheets filled end to end for the agreed example runs | 5 weeks |
 | 4. Deployment, rollout and final documentation | Go live for Phase 1 scope and hand over | Containerised deployment; rollout with GBG/BioZero; business acceptance on worked examples; then API reference, runbook, architecture and user documentation | Dev team, Tech Lead, business | Phase 1 live; documentation approved and handed over | 2 weeks rollout, then 2 weeks documentation |
 
-Out of this plan: analytics requests, registration and publishing, event notifications (project Phases 2 and 3), and the BenchLink and RMM integrations.
+Out of this plan: analytics requests, registration and publishing, and event notifications (project Phases 2 and 3).
 
 ## 3. Dependencies, risks and decisions needed
 
@@ -43,7 +43,7 @@ Out of this plan: analytics requests, registration and publishing, event notific
 - Template freeze (Phase 1) gates the JSON schema (Phase 2) and all development.
 - ChemDiary dev environment and API credentials gate the Phase 2 spikes.
 - GBG/BioZero sandbox endpoint gates end-to-end tests in Phase 3b.
-- Hosting pattern from the shared infrastructure call with Gernot, Martin and Deepak gates deployment.
+- Hosting pattern agreed with Gernot, Martin and Deepak gates deployment.
 
 **Main schedule risks**
 
