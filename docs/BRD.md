@@ -85,13 +85,25 @@ Development can start once the template is frozen, the field mapping is agreed a
 | P5 | Agreement on mandatory vs. optional fields per reaction step | Business | Jan H., users | API contract |
 | P6 | Patent department decision on automatic registration/publishing and lab-head reference confirmed | Business | Jan H. | Phase 2 |
 | P7 | Access to AutoLEAD Teams site and latest presentation deck | Business | Jan H. | Now |
-| P8 | Agreed JSON input schema per worksheet and per create-experiment call | Technical | Martin, dev team | Development |
-| P9 | ChemDiary dev environment and API credentials for the team | Technical | Martin, ChemDiary vendor | Development |
-| P10 | ChemDiary API catalogue and call sequence per worksheet (about 2+ calls each) | Technical | Dev team, vendor | Estimation |
-| P11 | GBG/BioZero interface agreement: sync response vs. webhook plus callback, auth, payload sizes, error handling | Technical | Martin, BioZero | Development |
-| P12 | Hosting and deployment pattern (containers, scaling) | Technical | Gernot, Martin, Deepak | Development |
-| P13 | Non-functional targets: availability, expected call volume, logging and audit trail | Technical | Tech Lead | Design |
-| P14 | GBG test or sandbox endpoint to run end-to-end tests | Technical | BioZero | Integration test |
+| P8 | ChemDiary dev environment, API documentation and a service account | Technical | Martin, ChemDiary vendor | Spikes |
+| P9 | Four technical spikes completed (see below) | Technical | Tech team | Development |
+| P10 | OpenAPI spec and JSON schema per template block, reviewed with BioZero | Technical | Tech team, BioZero | Development |
+| P11 | Architecture doc: hosting, deployment (containers) and network path from the lab | Technical | Gernot, Martin, Deepak | Development |
+| P12 | Non-functional targets: availability, expected call volume, logging and audit trail | Technical | Tech Lead | Design |
+| P13 | GBG test or sandbox endpoint to run end-to-end tests | Technical | BioZero | Integration test |
+
+**Design principle:** a simple REST API with few endpoints, plain JSON, no workflow logic, an idempotency key on every write, and validation before anything is written to ChemDiary.
+
+**Technical spikes (Phase 2 of the timeline plan)**
+
+| # | Spike | Question to answer | Output |
+| --- | --- | --- | --- |
+| 1 | ChemDiary API coverage | Can the API create an experiment from the template and fill every block, including tables and the chromatogram file? | Call sequence per block; list of gaps |
+| 2 | Template behaviour | Do API writes trigger the template automations? Which fields are calculated? | Final endpoint and payload list |
+| 3 | GBG interface | How does GBG call the API, and does it need the experiment ID in the same response? | Synchronous reply or callback decision; sample payload |
+| 4 | Authentication | How does the service authenticate to ChemDiary, and how does GBG authenticate to the service? | Auth decision |
+
+Hosting, network path and rate limits are covered in the architecture document, not as separate spikes.
 
 ## 7. Assumptions, risks, open questions and next steps
 
