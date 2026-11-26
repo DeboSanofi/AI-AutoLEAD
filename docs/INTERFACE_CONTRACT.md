@@ -2,7 +2,7 @@
 
 Draft of 24 Nov 2026.
 
-This draft proposes the API that GBG calls to create a ChemDiary experiment and fill its worksheets, with one call per workflow step. It is a starting point for the Tech Lead and BioZero to review; every field name and value is illustrative until the data model is confirmed.
+This draft proposes the API that GBG calls to create a ChemDiary experiment and fill its worksheets, with one call per workflow step. It is a starting point for the Tech Lead and Biosero to review; every field name and value is illustrative until the data model is confirmed.
 
 ## 1. Purpose and design principles
 
@@ -116,7 +116,7 @@ Illustrative only. Field names and values are placeholders until the data model 
 
 | # | Decision | Options | Owner |
 | --- | --- | --- | --- |
-| 1 | How GBG receives the experiment ID | Synchronous reply to the create call; or webhook, with the middleware calling back later | Tech Lead, BioZero |
+| 1 | How GBG receives the experiment ID | Synchronous reply to the create call; or webhook, with the middleware calling back later | Tech Lead, Biosero |
 | 2 | Granularity of endpoints | One per template block; or one per workflow step | Tech Lead, Jan H. |
 | 3 | Behaviour on missing mandatory fields | Reject the whole call; or write what is valid and report the rest | Tech Lead, business |
 | 4 | Authentication method | API key agreed; confirm key storage and rotation on SCALe | Tech Lead |

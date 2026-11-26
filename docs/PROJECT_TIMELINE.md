@@ -29,10 +29,10 @@ Phase 1 (Make-side ChemDiary integration) runs in four phases, from requirements
 | Phase | Goal | Key activities | Owner | Exit gate | Indicative duration |
 | --- | --- | --- | --- | --- | --- |
 | 1. Requirement gathering (now) | Agree what to build | Template walkthrough with business and the second Jan; field mapping GBG vs. ChemDiary; mandatory vs. optional fields; BRD review; user stories | Product Owner, Jan H. | BRD signed off; template frozen or change process agreed; field mapping complete | 2 weeks |
-| 2. Spikes and prerequisite architecture docs | Remove technical unknowns for a simple REST API | Access first, then five spikes: (1) ChemDiary API walking skeleton, creating an experiment and filling every block; (2) pipeline and deployment skeleton on SCALe non-prod; (3) template automations and calculated fields; (4) GBG interface, API key and synchronous reply; (5) state and idempotency. Spikes 1 and 2 start in parallel. Then OpenAPI spec and JSON schema | Tech team, Tech Lead | Spike results reviewed; OpenAPI spec agreed with BioZero; SCALe deployment confirmed; dev environment and credentials available | 2 weeks |
+| 2. Spikes and prerequisite architecture docs | Remove technical unknowns for a simple REST API | Access first, then five spikes: (1) ChemDiary API walking skeleton, creating an experiment and filling every block; (2) pipeline and deployment skeleton on SCALe non-prod; (3) template automations and calculated fields; (4) GBG interface, API key and synchronous reply; (5) state and idempotency. Spikes 1 and 2 start in parallel. Then OpenAPI spec and JSON schema | Tech team, Tech Lead | Spike results reviewed; OpenAPI spec agreed with Biosero; SCALe deployment confirmed; dev environment and credentials available | 2 weeks |
 | 3a. Development: template | Create an experiment from the AutoLEAD template and return the reference ID | Create-experiment endpoint; header fields; reaction scheme tables; unit and contract tests | Dev team | Experiment created from GBG test call; ID returned | 3 weeks |
 | 3b. Development: mandatory worksheets | Fill each mandatory worksheet with one call | One endpoint per mandatory worksheet (e.g. procedure, analytic); optional fields by reaction step; idempotency keys, validation and error handling; end-to-end tests with GBG sandbox | Dev team | All mandatory worksheets filled end to end for the agreed example runs | 5 weeks |
-| 4. Deployment, rollout and final documentation | Go live for Phase 1 scope and hand over | Deployment to SCALe through the internal pipeline; rollout with GBG/BioZero; business acceptance on worked examples; then API reference, runbook, architecture and user documentation | Dev team, Tech Lead, business | Phase 1 live; documentation approved and handed over | 2 weeks rollout, then 2 weeks documentation |
+| 4. Deployment, rollout and final documentation | Go live for Phase 1 scope and hand over | Deployment to SCALe through the internal pipeline; rollout with GBG/Biosero; business acceptance on worked examples; then API reference, runbook, architecture and user documentation | Dev team, Tech Lead, business | Phase 1 live; documentation approved and handed over | 2 weeks rollout, then 2 weeks documentation |
 
 Out of this plan: analytics requests, registration and publishing, and event notifications (project Phases 2 and 3).
 
@@ -42,14 +42,14 @@ Out of this plan: analytics requests, registration and publishing, and event not
 
 - Template freeze (Phase 1) gates the JSON schema (Phase 2) and all development.
 - ChemDiary dev environment and API credentials gate the Phase 2 spikes.
-- GBG/BioZero sandbox endpoint gates end-to-end tests in Phase 3b.
+- GBG/Biosero sandbox endpoint gates end-to-end tests in Phase 3b.
 - Hosting pattern agreed with Gernot, Martin and Deepak gates deployment.
 
 **Main schedule risks**
 
 - Template changes after the schema is agreed cause rework in Phases 3a and 3b.
 - GBG may not hold every field the template needs, which adds data-source work.
-- Dependence on BioZero availability for the interface agreement and testing.
+- Dependence on Biosero availability for the interface agreement and testing.
 - Scope growth into analytics and registration before Phase 1 is live.
 
 **Decisions needed from the Tech Lead**

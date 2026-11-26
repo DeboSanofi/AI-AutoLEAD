@@ -7,7 +7,7 @@ This matrix links every field GBG can send to the ChemDiary template field it fi
 ## 1. Purpose and how to complete it
 
 - **Source of truth:** ChemDiary data model and template (for field names, mandatory flags, dropdown values); GBG project data structure (for what GBG already holds).
-- **Status values:** To do, Draft, Confirmed by business, Confirmed by BioZero.
+- **Status values:** To do, Draft, Confirmed by business, Confirmed by Biosero.
 - **Rule:** A field with no GBG source goes on the gap list in section 4. It is never silently dropped.
 - **Scope:** ChemDiary integration only.
 
@@ -79,7 +79,7 @@ Split rows with grouped fields into one row per field once the data model is ava
 | # | Question or input | From | Needed for |
 | --- | --- | --- | --- |
 | 1 | Data model: field names or IDs, mandatory flags, dropdown values, validation rules | Business, ChemDiary vendor | Completing section 3 |
-| 2 | GBG project data structure: which fields it holds | BioZero, Jan H. | GBG source column |
+| 2 | GBG project data structure: which fields it holds | Biosero, Jan H. | GBG source column |
 | 3 | Which fields are calculated by ChemDiary from the structure (MF, FM, EM, MW, Theo Mass, Theo Mol, Yield)? | ChemDiary vendor | Payload size |
 | 4 | Where does work-up text go, and is the placeholder worksheet used? | Jan H. | Endpoint list |
 | 5 | Do API writes trigger the template automations (e.g. structure fills Samples Table and Container table)? | ChemDiary vendor | Design |

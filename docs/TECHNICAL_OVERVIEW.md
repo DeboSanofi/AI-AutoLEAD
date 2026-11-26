@@ -257,7 +257,7 @@ This shows one reactant and one product with all columns from the template. Valu
 3. **Meaningful status codes** and one error shape everywhere, with a machine-readable code, a field path and a `retryable` flag.
 4. **Idempotency-Key on every write:** store the key, a payload hash and the result; a repeat returns the stored result, and the same key with a different payload returns 409.
 5. **Strict validation with Pydantic models:** reject unknown fields, check mandatory fields and allowed values, and do it before any ChemDiary write. Return 422 with the field paths.
-6. **OpenAPI is the contract:** FastAPI generates it from the models; review it with BioZero and add contract tests in CI.
+6. **OpenAPI is the contract:** FastAPI generates it from the models; review it with Biosero and add contract tests in CI.
 7. **API key handling:** send it in the `X-API-Key` header over TLS only, read it from a SCALe secret, compare in constant time, never log it, and support rotation.
 8. **Consistent data types:** ISO 8601 dates, explicit units on every quantity, IDs as strings.
 9. **Resilient calls to ChemDiary:** short timeouts and bounded retries with backoff, then a clear 502 or 503 with `retryable`.
@@ -274,7 +274,7 @@ This shows one reactant and one product with all columns from the template. Valu
 | 1 | ChemDiary API walking skeleton | From a FastAPI call, can we create an experiment from the template and fill one block, then every block, including tables and the chromatogram file? | Call sequence per block; list of gaps |
 | 2 | Pipeline and deployment skeleton | Can a hello-world container build on the internal runners, push to the registry and run on SCALe non-prod, reachable from GBG's network? | Working pipeline and network path |
 | 3 | Template behaviour | Do API writes trigger the automations (Samples and Container tables), and which fields are calculated? | Final endpoint and payload list |
-| 4 | GBG interface | Can GBG send an API key header and wait for a synchronous reply with the experiment ID? What are the timeouts and payload sizes? | Agreed contract with BioZero |
+| 4 | GBG interface | Can GBG send an API key header and wait for a synchronous reply with the experiment ID? What are the timeouts and payload sizes? | Agreed contract with Biosero |
 | 5 | State and idempotency | Is there a persistent store on SCALe? If not, can we keep GBG's run ID in the experiment and look it up? | Idempotency design |
 
-Start spikes 1 and 2 in parallel, run spike 4 as a conversation with BioZero meanwhile, and do spike 3 after spike 1.
+Start spikes 1 and 2 in parallel, run spike 4 as a conversation with Biosero meanwhile, and do spike 3 after spike 1.
