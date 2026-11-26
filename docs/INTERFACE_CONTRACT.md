@@ -10,7 +10,7 @@ This draft proposes the API that GBG calls to create a ChemDiary experiment and 
 - **No workflow logic in the middleware (Phase 1):** GBG decides what to send and when.
 - **Idempotent writes:** A repeated call with the same key never duplicates data.
 - **Clear failure reporting:** Because one call becomes many, the response says exactly what was written and what failed.
-- **Scope:** ChemDiary integration only.
+- **Scope:** ChemDiary integration only. Python FastAPI container on SCALe.
 
 ## 2. Proposed endpoints
 
@@ -35,9 +35,9 @@ If ChemDiary fills the Samples Table and Container table automatically from the 
 
 | Element | Proposal | Status |
 | --- | --- | --- |
-| Authentication | Service credential for GBG; method to be agreed with BioZero and security | Open |
+| Authentication | API key in the X-API-Key header (GBG is the only consumer), stored as a SCALe secret | Open |
 | Identity in ChemDiary | A service account writes the data; confirm how the audit trail shows it | Open |
-| Idempotency | Client-supplied key per call; repeats return the original result | Proposed |
+| Idempotency | Client-supplied key per call; repeats return the original result. Where the key is stored is open (spike 5) | Proposed |
 | Experiment reference | GBG sends its own run ID on create; the middleware returns the ChemDiary ID | Proposed |
 | Validation | Mandatory fields checked before any ChemDiary write; whole call rejected if missing | Proposed |
 | Partial failure | Response lists each field as written or failed, so GBG can retry only the failures | Proposed |
@@ -119,6 +119,6 @@ Illustrative only. Field names and values are placeholders until the data model 
 | 1 | How GBG receives the experiment ID | Synchronous reply to the create call; or webhook, with the middleware calling back later | Tech Lead, BioZero |
 | 2 | Granularity of endpoints | One per template block; or one per workflow step | Tech Lead, Jan H. |
 | 3 | Behaviour on missing mandatory fields | Reject the whole call; or write what is valid and report the rest | Tech Lead, business |
-| 4 | Authentication method | To agree with BioZero and security | Tech Lead |
+| 4 | Authentication method | API key agreed; confirm key storage and rotation on SCALe | Tech Lead |
 | 5 | Which worksheets GBG fills | Depends on the field mapping matrix | Jan H. |
 | 6 | How to handle a half-filled experiment after a failure | Retry from GBG; or reconciliation job | Tech Lead |

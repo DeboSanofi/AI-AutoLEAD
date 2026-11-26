@@ -9,7 +9,7 @@ The Phase 1 integration takes about 16 weeks from today across four phases: requ
 ```mermaid
 flowchart LR
     P1["<b>Phase 1 (now)</b><br/>Requirements, 2 weeks<br/>BRD sign-off, field mapping<br/>Owner: PO"]
-    P2["<b>Phase 2</b><br/>Spikes + arch, 2 weeks<br/>API and GBG spikes, architecture docs<br/>Owner: tech team"]
+    P2["<b>Phase 2</b><br/>Spikes + arch, 2 weeks<br/>API and GBG spikes, pipeline on SCALe<br/>Owner: tech team"]
     P3A["<b>Phase 3: Template</b><br/>3 weeks<br/>Create experiment, return ref. ID<br/>Owner: dev team"]
     P3B["<b>Phase 3: Worksheets</b><br/>5 weeks<br/>Mandatory sheets, end-to-end tests<br/>Owner: dev team"]
     P4["<b>Phase 4</b><br/>Rollout + docs, 2 + 2 weeks<br/>Deploy phase 1, final documentation<br/>Owner: dev + Tech Lead"]
@@ -29,10 +29,10 @@ Phase 1 (Make-side ChemDiary integration) runs in four phases, from requirements
 | Phase | Goal | Key activities | Owner | Exit gate | Indicative duration |
 | --- | --- | --- | --- | --- | --- |
 | 1. Requirement gathering (now) | Agree what to build | Template walkthrough with business and the second Jan; field mapping GBG vs. ChemDiary; mandatory vs. optional fields; BRD review; user stories | Product Owner, Jan H. | BRD signed off; template frozen or change process agreed; field mapping complete | 2 weeks |
-| 2. Spikes and prerequisite architecture docs | Remove technical unknowns for a simple REST API | Four spikes: (1) ChemDiary API can create an experiment and fill every block, including tables and the chromatogram file; (2) template automations and calculated fields; (3) how GBG calls the API and whether it needs the experiment ID in the same response; (4) authentication to ChemDiary and from GBG. Then OpenAPI spec and JSON schema; architecture doc covering hosting, deployment and network path | Tech team, Tech Lead | Spike results reviewed; OpenAPI spec agreed with BioZero; architecture doc approved; dev environment and credentials available | 2 weeks |
+| 2. Spikes and prerequisite architecture docs | Remove technical unknowns for a simple REST API | Access first, then five spikes: (1) ChemDiary API walking skeleton, creating an experiment and filling every block; (2) pipeline and deployment skeleton on SCALe non-prod; (3) template automations and calculated fields; (4) GBG interface, API key and synchronous reply; (5) state and idempotency. Spikes 1 and 2 start in parallel. Then OpenAPI spec and JSON schema | Tech team, Tech Lead | Spike results reviewed; OpenAPI spec agreed with BioZero; SCALe deployment confirmed; dev environment and credentials available | 2 weeks |
 | 3a. Development: template | Create an experiment from the AutoLEAD template and return the reference ID | Create-experiment endpoint; header fields; reaction scheme tables; unit and contract tests | Dev team | Experiment created from GBG test call; ID returned | 3 weeks |
 | 3b. Development: mandatory worksheets | Fill each mandatory worksheet with one call | One endpoint per mandatory worksheet (e.g. procedure, analytic); optional fields by reaction step; idempotency keys, validation and error handling; end-to-end tests with GBG sandbox | Dev team | All mandatory worksheets filled end to end for the agreed example runs | 5 weeks |
-| 4. Deployment, rollout and final documentation | Go live for Phase 1 scope and hand over | Containerised deployment; rollout with GBG/BioZero; business acceptance on worked examples; then API reference, runbook, architecture and user documentation | Dev team, Tech Lead, business | Phase 1 live; documentation approved and handed over | 2 weeks rollout, then 2 weeks documentation |
+| 4. Deployment, rollout and final documentation | Go live for Phase 1 scope and hand over | Deployment to SCALe through the internal pipeline; rollout with GBG/BioZero; business acceptance on worked examples; then API reference, runbook, architecture and user documentation | Dev team, Tech Lead, business | Phase 1 live; documentation approved and handed over | 2 weeks rollout, then 2 weeks documentation |
 
 Out of this plan: analytics requests, registration and publishing, and event notifications (project Phases 2 and 3).
 
